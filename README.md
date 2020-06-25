@@ -20,7 +20,21 @@ ___
 * Update attributes of the created objects
 * Delete or Edit objects
 ___
+**Compilation**
+* Download Files.
+* Access AirBnb downloaded directory.
+* Execute console ./console
+___
+**Example**
+Interactive Mode:
 
+![image](https://user-images.githubusercontent.com/60362631/85659218-e8210e80-b679-11ea-84ec-f115219efa22.png)
+
+Non-Interactive Mode:
+
+![image](https://user-images.githubusercontent.com/60362631/85659352-1272cc00-b67a-11ea-8f92-bf2c0f8bd7e8.png)
+___
 **Authors**
+
 Michael G. - [Github](https://github.com/R6Doc) / [Twitter](https://twitter.com/Docwastaken_)  
 Santiago Arboleda - [Github](https://github.com/Blazeker) / [Twitter](https://twitter.com/Blackzeker)
