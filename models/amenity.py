@@ -4,9 +4,9 @@ from models.base_model import BaseModel
 
 
 class Amenity(BaseModel):
-	"""Amenity"""
-	name = ""
+    """Amenity"""
+    name = ""
 
-	def __init__(self, *args, **kwargs):
-		"""Init Amenity"""
-		super().__init__(*args,**kwargs)
+    def __init__(self, *args, **kwargs):
+        """Init Amenity"""
+        super().__init__(*args, **kwargs)
