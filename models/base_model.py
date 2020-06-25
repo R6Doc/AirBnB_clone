@@ -26,7 +26,7 @@ class BaseModel:
             {
                 "id":self.id,
                 
-
+                created_at = created_at.strftime(time)
             }
         )
 
