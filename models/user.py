@@ -12,4 +12,4 @@ class User(BaseModel):
 
     def __init__(self, *args, **kwargs):
         """Init User"""
-        super().__init__(*args, *kwargs)
+        super().__init__(*args, **kwargs)
