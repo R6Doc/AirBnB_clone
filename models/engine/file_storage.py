@@ -15,10 +15,9 @@ classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
 
 
 class FileStorage:
+    """Serialization to JSON"""
     __file_path = "file.json"
     __objects = {}
-    """Serialization to JSON"""
-
 
     def all(self):
         """Return dict _objects"""
@@ -32,9 +31,9 @@ class FileStorage:
 
     def save(self):
         """Serializa objs in JSON"""
-        jsonObjects = []
-        for key in self.__objects.keys():
-            jsonObjects[key] = self.__objects[key].to_dict()
+        jsonObjects = {}
+        for key, value in self.__objects.items():
+            jsonObjects[key] = value.to_dict()
         with open(self.__file_path, "w") as f:
             json.dump(jsonObjects, f)
 
@@ -43,7 +42,8 @@ class FileStorage:
         try:
             with open(self.__file_path, "r") as f:
                 objson = json.load(f)
-                for dicts in objson.values():
-                    self.new(self, dicts)
+                for key, values in objson.items():
+                    Obj_n = eval(values['__class__'])(**values)
+                    self.__objects[key] = Obj_n
         except FileNotFoundError:
             return
