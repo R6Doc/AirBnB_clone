@@ -81,9 +81,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
         print([objects for objects in storage.all().values()
-            if strings[0] == objects.__class__.__name__])
-
-
+              if strings[0] == objects.__class__.__name__])
 
     def help_quit(self):
         """ Prints the help for the quit """
