@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 from datetime import datetime
-from uuid import uuid4
+import uuid
 import models
 
 time = "%Y-%m-%dT%H:%M:%S.%f"
@@ -10,7 +10,7 @@ class BaseModel:
     """ Class Base """
 
     def __init__(self, *args, **kwargs):
-        self.id = str(uuid4())
+        self.id = str(uuid.uuid4())
         self.created_at = datetime.today()
         self.updated_at = datetime.today()
         if len(kwargs) != 0:
@@ -20,7 +20,7 @@ class BaseModel:
                 else:
                     self.__dict__[key] = value
         else:
-            self.id = str(uuid4())
+            self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = self.created_at
             models.storage.new(self)
