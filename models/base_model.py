@@ -1,14 +1,17 @@
 #!/usr/bin/python3
 """ Module for base model """
 
-import models
 from datetime import datetime
-from uuid import uuid4
+import uuid
+from amenity import Amenity
+from city import City
+from place import Place
+from review import Review
+from state import State
+from user import User
 
 
 time = "%Y-%m-%dT%H:%M:%S.%f"
-
-
 class BaseModel:
     """ Class Base """
 
