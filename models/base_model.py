@@ -24,6 +24,7 @@ class BaseModel:
             self.created_at = datetime.now()
             self.updated_at = self.created_at
             models.storage.new(self)
+            models.storage.save()
 
     def __str__(self):
         """ Returns the string representation """
@@ -33,13 +34,13 @@ class BaseModel:
 
     def save(self):
         """ Update the updatet_at attribute """
-        self.updated_at = datetime.today()
+        self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
         """ Return the dictionary representation of the attributes """
         my_dict = self.__dict__.copy()
-        my_dict["created_at"] = self.created_at.isoformat()
-        my_dict["updated_at"] = self.updated_at.isoformat()
+        my_dict["created_at"] = self.created_at.strftime(time)
+        my_dict["updated_at"] = self.updated_at.strftime(time)
         my_dict["__class__"] = self.__class__.__name__
         return my_dict
