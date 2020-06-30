@@ -4,8 +4,7 @@
 
 from datetime import datetime
 import uuid
-from models.__init__ import storage
-
+import models
 time = "%Y-%m-%dT%H:%M:%S.%f"
 
 
