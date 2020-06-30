@@ -40,7 +40,9 @@ class BaseModel:
     def to_dict(self):
         """ Return the dictionary representation of the attributes """
         my_dict = self.__dict__.copy()
-        my_dict["created_at"] = self.created_at.strftime(time)
-        my_dict["updated_at"] = self.updated_at.strftime(time)
+        if "created_at" in my_dict:
+            my_dict["created_at"] = self.created_at.strftime(time)
+        if "updated_at" in my_dict:
+            my_dict["updated_at"] = self.updated_at.strftime(time)
         my_dict["__class__"] = self.__class__.__name__
         return my_dict
