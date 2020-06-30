@@ -11,4 +11,4 @@ class Review(BaseModel):
 
     def __init__(self, *args, **kwargs):
         """Init Review"""
-        super().__init__(*arg, **kwargs)
+        super().__init__(*args, **kwargs)
