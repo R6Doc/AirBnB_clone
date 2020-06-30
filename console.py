@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+""" Module for base class """
+
+
 import cmd
 import sys
 import models
@@ -9,7 +12,7 @@ from models.city import City
 from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
-import shlex #this is for line spliting RTFM
+import shlex
 
 
 classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
@@ -90,7 +93,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, arg):
         """Update an instance based on class, attr, id, etc"""
-        args = shlex.split(arg) #split args
+        args = shlex.split(arg)
         integers = ["number_rooms", "number_bathrooms", "max_guest",
                     "price_by_night"]
         floats = ["latitude", "longitude"]
