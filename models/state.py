@@ -5,7 +5,3 @@ from models.base_model import BaseModel
 
 class State(BaseModel):
     """An State"""
-
-    def __init__(self, *args, **kwargs):
-        """Init State"""
-        super().__init__(*args, **kwargs)
