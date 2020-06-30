@@ -1,11 +1,7 @@
 #!/usr/bin/python3
-"""
-Module for base models
-"""
-
 from datetime import datetime
-import models
 from uuid import uuid4
+import models
 
 time = "%Y-%m-%dT%H:%M:%S.%f"
 
