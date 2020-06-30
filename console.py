@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import cmd
 import sys
-from models import storage
+import models
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State
@@ -9,6 +9,11 @@ from models.city import City
 from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
+import shlex #this is for line spliting RTFM
+
+
+classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
+           "Place": Place, "Review": Review, "State": State, "User": User}
 
 
 class HBNBCommand(cmd.Cmd):
@@ -83,32 +88,44 @@ class HBNBCommand(cmd.Cmd):
         print([str(value) for key, value in storage.all().items()
               if aux[0] == type(value).__name__])
 
-    def do_update(self, line):
-        """ Update an instace """
-        aux = line.split()
-        if not len(line):
+    def do_update(self, arg):
+        """Update an instance based on class, attr, id, etc"""
+        args = shlex.split(arg) #split args
+        integers = ["number_rooms", "number_bathrooms", "max_guest",
+                    "price_by_night"]
+        floats = ["latitude", "longitude"]
+
+        if len(args) == 0:
             print("** class name missing **")
-            return
-        if aux[0] not in HBNBCommand.classes:
+        elif args[0] in classes:
+            if len(args) > 1:
+                k = args[0] + "." + args[1]
+                if k in models.storage.all():
+                    if len(args) > 2:
+                        if len(args) > 3:
+                            if args[0] == "Place":
+                                if args[2] in integers:
+                                    try:
+                                        args[3] = int(args[3])
+                                    except:
+                                        args[3] = 0
+                                elif args[2] in floats:
+                                    try:
+                                        args[3] = float(args[3])
+                                    except:
+                                        args[3] = 0.0
+                            setattr(models.storage.all()[k], args[2], args[3])
+                            models.storage.all()[k].save()
+                        else:
+                            print("** value missing **")
+                    else:
+                        print("** attribute name missing **")
+                else:
+                    print("** no instance found **")
+            else:
+                print("** instance id missing **")
+        else:
             print("** class doesn't exist **")
-            return
-        if len(aux) == 1:
-            print("** instance id missing **")
-            return
-        if len(aux) == 2:
-            print("** attribute name missing **")
-            return
-        if len(aux) == 3:
-            print("** value missing **")
-            return
-        keyWord = aux[0] + '.' + aux[1]
-        if keyWord not in storage.all().keys():
-            print("** no instance found **")
-            return
-        try:
-            setattr(storage.all()[keyWord], aux[2], eval(aux[3]))
-        except:
-            setattr(storage.all()[keyWord], aux[2], aux[3])
 
     def help_quit(self):
         """ Prints the help for the quit """
