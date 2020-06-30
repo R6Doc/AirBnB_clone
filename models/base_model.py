@@ -4,7 +4,7 @@
 
 from datetime import datetime
 import uuid
-import models
+
 
 time = "%Y-%m-%dT%H:%M:%S.%f"
 
@@ -27,6 +27,7 @@ class BaseModel:
             self.created_at = datetime.now()
             self.updated_at = self.created_at
             models.storage.new(self)
+            models.storage.save()
 
     def __str__(self):
         """ Returns the string representation """
