@@ -18,12 +18,6 @@ class state_tests(unittest.TestCase):
         self.assertTrue(hasattr(instance, "created_at"))
         self.assertTrue(hasattr(instance, "updated_at"))
 
-    def test_stateout(self):
-        """ Test the correct output """
-        instance = State()
-        output = "[State] ({}) {}".format(instance.id, instance.__dict__)
-        self.assertEqual(output, str(instance))
-
     def test_statename(self):
         """ Test the name """
         instance = State()

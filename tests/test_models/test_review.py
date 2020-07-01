@@ -18,12 +18,6 @@ class review_tests(unittest.TestCase):
         self.assertTrue(hasattr(instance, "created_at"))
         self.assertTrue(hasattr(instance, "updated_at"))
 
-    def test_reviewout(self):
-        """ Test the correct output """
-        instance = Review()
-        output = "[Review] ({}) {}".format(instance.id, instance.__dict__)
-        self.assertEqual(output, str(instance))
-
     def test_reviewname(self):
         """ Test for the name"""
         instance = Review()

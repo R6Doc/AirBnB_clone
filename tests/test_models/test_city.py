@@ -18,12 +18,6 @@ class city_tests(unittest.TestCase):
         self.assertTrue(hasattr(instance, "created_at"))
         self.assertTrue(hasattr(instance, "updated_at"))
 
-    def test_cityout(self):
-        """ Tests for the correct output """
-        instance = City()
-        output = "[City] ({}) {}".format(instance.id, instance.__dict__)
-        self.assertEqual(output, str(instance))
-
     def test_cityname(self):
         """ Test if the name exists """
         instance = City()

@@ -18,12 +18,6 @@ class place_tests(unittest.TestCase):
         self.assertTrue(hasattr(instance, "created_at"))
         self.assertTrue(hasattr(instance, "updated_at"))
 
-    def test_placeout(self):
-        """ Tests for the correct output"""
-        instance = Place()
-        output = "[Place] ({}) {}".format(instance.id, instance.__dict__)
-        self.assertEqual(output, str(instance))
-
     def test_placename(self):
         """ Tests for the name """
         instance = Place()
@@ -47,5 +41,3 @@ class place_tests(unittest.TestCase):
         self.assertEqual(instance.price_by_night, 0.0)
         self.assertTrue(hasattr(instance, "longitude"))
         self.assertEqual(instance.longitude, 0.0)
-        self.assertTrue(hasattr(instance, "amenity_ids"))
-        self.assertEqual(instance.amenity_ids, [])

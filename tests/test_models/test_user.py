@@ -18,12 +18,6 @@ class user_tests(unittest.TestCase):
         self.assertTrue(hasattr(instance, "created_at"))
         self.assertTrue(hasattr(instance, "updated_at"))
 
-    def test_userout(self):
-        """ Test the correct output """
-        instance = User()
-        output = "[User] ({}) {}".format(instance.id, instance.__dict__)
-        self.assertEqual(output, str(instance))
-
     def test_username(self):
         """ Test the name """
         instance = User()

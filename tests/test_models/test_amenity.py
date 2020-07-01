@@ -18,12 +18,6 @@ class amenity_tests(unittest.TestCase):
         self.assertTrue(hasattr(inst, "created_at"))
         self.assertTrue(hasattr(inst, "updated_at"))
 
-    def test_amenityout(self):
-        """ Test for correct output """
-        instance = Amenity()
-        output = "[Amenity] ({}) {}".format(instance.id, instance.__dict__)
-        self.assertEqual(output, str(instance))
-
     def test_amenityname(self):
         """ Test if the name exists """
         instance = Amenity()
