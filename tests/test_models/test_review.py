@@ -1,12 +1,35 @@
 #!/usr/bin/python3
-"""Tests review file"""
+"""  Tests for review """
 
 import unittest
+import models
+from models.review import Review
+from models.base_model import BaseModel
 
 
-class TestsBase(unittest.TestCase):
-    """Class to test the review cases"""
+class review_tests(unittest.TestCase):
+    """ Tests for review file """
 
-    def test_any(self):
-        """Test"""
-        pass
+    def test_reviewsub(self):
+        """ Test for the subclass review """
+        instance = Review()
+        self.assertIsInstance(instance, BaseModel)
+        self.assertTrue(hasattr(instance, "id"))
+        self.assertTrue(hasattr(instance, "created_at"))
+        self.assertTrue(hasattr(instance, "updated_at"))
+
+    def test_reviewout(self):
+        """ Test the correct output """
+        instance = Review()
+        output = "[Review] ({}) {}".format(instance.id, instance.__dict__)
+        self.assertEqual(output, str(instance))
+
+    def test_reviewname(self):
+        """ Test for the name"""
+        instance = Review()
+        self.assertTrue(hasattr(instance, "place_id"))
+        self.assertEqual(instance.place_id, "")
+        self.assertTrue(hasattr(instance, "user_id"))
+        self.assertEqual(instance.user_id, "")
+        self.assertTrue(hasattr(instance, "text"))
+        self.assertEqual(instance.user_id, "")

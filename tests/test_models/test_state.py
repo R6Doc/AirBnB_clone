@@ -1,12 +1,31 @@
 #!/usr/bin/python3
-"""Tests state file"""
+""" Test for state """
 
 import unittest
+import models
+from models.state import State
+from models.base_model import BaseModel
 
 
-class TestsBase(unittest.TestCase):
-    """Class to test the state cases"""
+class state_tests(unittest.TestCase):
+    """ Tests for state file """
 
-    def test_any(self):
-        """Test"""
-        pass
+    def test_state(self):
+        """ Test for the subclass state """
+        instance = State()
+        self.assertIsInstance(instance, BaseModel)
+        self.assertTrue(hasattr(instance, "id"))
+        self.assertTrue(hasattr(instance, "created_at"))
+        self.assertTrue(hasattr(instance, "updated_at"))
+
+    def test_stateout(self):
+        """ Test the correct output """
+        instance = State()
+        output = "[State] ({}) {}".format(instance.id, instance.__dict__)
+        self.assertEqual(output, str(instance))
+
+    def test_statename(self):
+        """ Test the name """
+        instance = State()
+        self.assertTrue(hasattr(instance, "name"))
+        self.assertEqual(instance.name, "")
