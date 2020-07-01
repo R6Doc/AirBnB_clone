@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
-Test BaseModel
-"""
+""" Test BaseModel """
 
 import unittest
 import models
@@ -11,67 +9,67 @@ from time import sleep
 
 
 class TestBaseModel(unittest.TestCase):
-    """Diferent cases to test BaseModel Class"""
+    """ Tests for basemodel class """
 
-    def test_noargs(self):
-        """basemodel exists without any arg"""
+    def test_noarguments(self):
+        """ Test to prove the basemodel with no arguments """
         self.assertEqual(BaseModel, type(BaseModel()))
 
-    def test_id(self):
-        """test id id exists"""
+    def test_baseid(self):
+        """ Test with only the id """
         self.assertEqual(str, type(BaseModel().id))
 
-    def test_created_at(self):
-        """test if created at exists and have correct dateform"""
+    def test_basecreated(self):
+        """ Test of created at variable """
         self.assertEqual(datetime, type(BaseModel().created_at))
 
-    def test_updated_at(self):
-        """test id updated_at exists and have correct dateform"""
+    def test_baseupdated(self):
+        """ Test of updated at variable with correct datetime """
         self.assertEqual(datetime, type(BaseModel().updated_at))
 
-    def test_dict(self):
-        """test id to_dict exist when we create a new instance(tester)"""
+    def test_basedict(self):
+        """ Test of the function to dict method """
         tester = BaseModel()
         self.assertTrue(dict, type(tester.to_dict()))
 
-    def test_dict_content(self):
-        """test if dict contain correct attributes"""
+    def test_basedict2(self):
+        """ Test to know if the attributes are on the dict """
         tester = BaseModel()
         self.assertIn("id", tester.to_dict())
         self.assertIn("created_at", tester.to_dict())
         self.assertIn("updated_at", tester.to_dict())
 
-    def test_different_ids(self):
-        """test if 2 instances have different ids attributes"""
-        tester1 = BaseModel()
-        tester2 = BaseModel()
-        self.assertNotEqual(tester1.id, tester2, id)
+    def test_baseid_different(self):
+        """ Test to prove if the class create 2 different ids"""
+        test1 = BaseModel()
+        test2 = BaseModel()
+        self.assertNotEqual(test1.id, test2, id)
 
-    def test_different_times(self):
-        """test if created_at and updated_at are different in 2 instances"""
-        tester1 = BaseModel()
-        sleep(0.01)
-        tester2 = BaseModel()
-        self.assertNotEqual(tester1.created_at, tester2.created_at)
-        self.assertNotEqual(tester1.updated_at, tester2.updated_at)
+    def test_basedif_times(self):
+        """ Test for different times of creation """
+        test1 = BaseModel()
+        sleep(0.5)
+        test2 = BaseModel()
+        self.assertNotEqual(test1.created_at, test2.created_at)
+        self.assertNotEqual(test1.updated_at, test2.updated_at)
 
-    def test_save(self):
-        """test save"""
-        tester1 = BaseModel()
-        updt = tester1.updated_at
-        sleep(0.2)
-        tester1.save()
-        self.assertNotEqual(tester1.updated_at, updt)
+    def test_basesave(self):
+        """ Test for save """
+        test1 = BaseModel()
+        updt = test1.updated_at
+        sleep(0.5)
+        test1.save()
+        self.assertNotEqual(test1.updated_at, updt)
 
-    def test_str(self):
-        """Test __str___"""
+    def test_basestr(self):
+        """ Test for str method """
         date1 = datetime.today()
-        tester1 = BaseModel()
-        tester1.id = 821983719274
-        tester1.created_at = date1
-        tester1.updated_at = date1
-        testerstr = tester1.__str__()
-        self.assertIn("[BaseModel] (821983719274)", testerstr)
-        self.assertIn("'id': 821983719274", testerstr)
+        test1 = BaseModel()
+        test1.id = 712456769374
+        test1.created_at = date1
+        test1.updated_at = date1
+        testerstr = test1.__str__()
+        self.assertIn("[BaseModel] (712456769374)", testerstr)
+        self.assertIn("'id': 712456769374", testerstr)
         self.assertIn("'created_at': " + repr(date1), testerstr)
         self.assertIn("'updated_at': " + repr(date1), testerstr)

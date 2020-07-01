@@ -4,7 +4,7 @@
 import unittest
 
 
-class TestsBase(unittest.TestCase):
+class TestsUpdate(unittest.TestCase):
     """Class to test the update cases"""
 
     def test_any(self):
