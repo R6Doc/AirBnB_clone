@@ -66,24 +66,21 @@ class TestFileStorage(unittest.TestCase):
 
     def test_FS_reload(self):
         """ Tests the reload """
-        Root = os.path.dirname(os.path.abspath("console.py"))
-        path = os.path.join(Root, "file.json")
-        with open(path, 'r') as f:
+        with open("file.json", 'r') as f:
             lines = f.readlines()
         try:
             os.remove(path)
         except Exception:
             pass
-        with open(path, 'r') as f:
+        with open("file.json", 'r') as f:
             lines2 = f.readlines()
         self.assertEqual(lines, lines2)
         try:
-            os.remove(path)
+            os.remove("file.json")
         except Exception:
             pass
-        with open(path, "w") as f:
+        with open("file.json", "w") as f:
             f.write("{}")
-        with open(path, "r") as r:
+        with open("file.json", "r") as r:
             for line in r:
                 self.assertEqual(line, "{}")
-        self.assertIs(self.storage.reload(), None)
