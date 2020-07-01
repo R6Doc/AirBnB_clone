@@ -1,73 +1,91 @@
 #!/usr/bin/python3
-""" Test File_storage """
-
-import unittest
+""" Test file storage """
 import pep8
-import json
-from models import storage
-from models.engine.file_storage import FileStorage
+import os
+import models
+import unittest
+from datetime import datetime
 from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
+from models.user import User
+from models.state import State
+from models.place import Place
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 
 class TestFileStorage(unittest.TestCase):
+    """ Test cases for file storage """
 
-    """Class to test FileStorage"""
+    @classmethod
+    def Class1(cls):
+        """ Instanciando la clase """
+        cls.user = User()
+        cls.user.first_name = "Santiago"
+        cls.user.last_name = "Mic"
+        cls.user.email = "3890@gmail.com"
+        cls.storage = FileStorage()
 
-    def test_pep8_conformance_FileStorage(self):
-        """Test that we conform to PEP8."""
-        pep8style = pep8.StyleGuide(quiet=True)
-        result = pep8style.check_files(['models/engine/file_storage.py'])
-        self.assertEqual(result.total_errors, 0)
+    @classmethod
+    def delete(cls):
+        """ Delete the instance """
+        del cls.user
 
-    def test_docstrings(self):
-        """Test docstrings"""
-        self.assertIsNotNone(FileStorage.__doc__)
-        self.assertIsNotNone(FileStorage.all.__doc__)
-        self.assertIsNotNone(FileStorage.new.__doc__)
-        self.assertIsNotNone(FileStorage.save.__doc__)
-        self.assertIsNotNone(FileStorage.reload.__doc__)
+    def Deletejson(self):
+        """ Delete the json file created """
+        try:
+            os.remove("file.json")
+        except Exception:
+            pass
 
-    def setUp(self):
-        """Set variables"""
-        self.my_model = BaseModel()
-        self.storaged = FileStorage()
+    def test_pep8_FS(self):
+        """ Pep8 style """
+        style = pep8.StyleGuide(quiet=True)
+        p = style.check_files(['models/engine/file_storage.py'])
+        self.assertEqual(p.total_errors, 0, "fix pep8")
 
-    def test_file_storage_methods(self):
-        """test if the methods exist"""
-        self.assertTrue(hasattr(self.storaged, "all"))
-        self.assertTrue(hasattr(self.storaged, "new"))
-        self.assertTrue(hasattr(self.storaged, "save"))
-        self.assertTrue(hasattr(self.storaged, "reload"))
+    def test_allFS(self):
+        """ Test the method all """
+        storage = FileStorage()
+        objects = storage.all()
+        self.assertIsNotNone(objects)
+        self.assertEqual(type(objects), dict)
+        self.assertIs(objects, storage._FileStorage__objects)
 
-    def test_all_method(self):
-        """Test for all method
-        """
-        dict_tmp = self.storaged.all()
-        self.assertEqual(type(dict_tmp), dict)
-        self.assertIs(dict_tmp, self.storaged._FileStorage__objects)
+    def test_newFS(self):
+        """ Test the creation """
+        storage = FileStorage()
+        objects = storage.all()
+        user = User()
+        user.id = 5678902
+        user.name = "Santiago"
+        storage.new(user)
+        key = user.__class__.__name__ + "." + str(user.id)
+        self.assertIsNotNone(objects[key])
 
-    def test_new_method(self):
-        """Test for new method
-        """
-        self.storaged.new(self.my_model)
-        key = 'BaseModel.{}'.format(self.my_model.id)
-        self.assertIn(key, self.storaged.all())
-
-    def test_attr(self):
-        """Test for attributes
-        """
-        self.assertTrue(isinstance(storage._FileStorage__objects, dict))
-        self.assertTrue(isinstance(storage._FileStorage__file_path, str))
-
-    def test_save_method(self):
-        """Test for save method
-        """
-        self.my_model.save()
-        key = "BaseModel.{}".format(self.my_model.id)
-        self.assertIn(key, self.storaged._FileStorage__objects.keys())
-
-    def test_reload_method(self):
-        """Test for reload method
-        """
-        self.storaged.reload()
-        self.assertTrue(len(self.storaged._FileStorage__objects) > 0)
+    def test_FS_reload(self):
+        """ Tests the reload """
+        self.storage.save()
+        Root = os.path.dirname(os.path.abspath("console.py"))
+        path = os.path.join(Root, "file.json")
+        with open(path, 'r') as f:
+            lines = f.readlines()
+        try:
+            os.remove(path)
+        except Exception:
+            pass
+        self.storage.save()
+        with open(path, 'r') as f:
+            lines2 = f.readlines()
+        self.assertEqual(lines, lines2)
+        try:
+            os.remove(path)
+        except Exception:
+            pass
+        with open(path, "w") as f:
+            f.write("{}")
+        with open(path, "r") as r:
+            for line in r:
+                self.assertEqual(line, "{}")
+        self.assertIs(self.storage.reload(), None)
